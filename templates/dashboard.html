@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>REMINESSANCE — Memory Intelligence</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#7b8496;
+    --line:#e8ebf2;
+    --purple:#7c5cff;
+    --purple2:#9b7cff;
+    --blue:#4f8cff;
+    --green:#28c98b;
+    --orange:#ffad4d;
+    --red:#ff6b7a;
+    --dark:#111827;
+}
+
+body{
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:235px;
+    background:#111827;
+    color:white;
+    padding:24px 16px;
+    z-index:10;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 10px 30px;
+}
+
+.brand-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#9b7cff,#6847ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    box-shadow:0 8px 25px rgba(124,92,255,.35);
+}
+
+.brand-name{
+    font-weight:800;
+    font-size:17px;
+    letter-spacing:.3px;
+}
+
+.brand-sub{
+    color:#8992a5;
+    font-size:9px;
+    margin-top:3px;
+}
+
+.nav-title{
+    color:#626c80;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    padding:0 11px 9px;
+    text-transform:uppercase;
+}
+
+.nav-item{
+    padding:11px 12px;
+    margin:3px 0;
+    border-radius:9px;
+    color:#aeb6c7;
+    font-size:12px;
+    display:flex;
+    gap:11px;
+    align-items:center;
+}
+
+.nav-item.active{
+    background:rgba(124,92,255,.18);
+    color:white;
+}
+
+.nav-item span{
+    font-size:15px;
+}
+
+.sidebar-bottom{
+    position:absolute;
+    left:16px;
+    right:16px;
+    bottom:20px;
+}
+
+.device-status{
+    border:1px solid #273044;
+    background:#171e2d;
+    padding:13px;
+    border-radius:12px;
+}
+
+.device-title{
+    font-size:11px;
+    font-weight:700;
+}
+
+.device-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:9px;
+    font-size:10px;
+    color:#8f98aa;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:5px;
+}
+
+.green{background:var(--green)}
+.orange{background:var(--orange)}
+.red{background:var(--red)}
+
+/* MAIN */
+
+.main{
+    margin-left:235px;
+    min-height:100vh;
+}
+
+/* TOPBAR */
+
+.topbar{
+    height:70px;
+    background:white;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+}
+
+.page-title{
+    font-size:18px;
+    font-weight:750;
+}
+
+.page-sub{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.system-pill{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:#eefbf6;
+    color:#15966a;
+    border:1px solid #d4f4e8;
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ddd5ff,#7c5cff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+}
+
+/* CONTENT */
+
+.content{
+    padding:25px 30px 40px;
+    max-width:1600px;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(110deg,#171b2c,#25204a);
+    border-radius:18px;
+    padding:25px 28px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    overflow:hidden;
+    position:relative;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    right:-100px;
+    top:-170px;
+    background:rgba(124,92,255,.17);
+}
+
+.hero-content{
+    position:relative;
+    z-index:1;
+}
+
+.hero-label{
+    color:#a99aff;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.3px;
+    font-weight:800;
+}
+
+.hero h1{
+    font-size:27px;
+    margin:7px 0;
+}
+
+.hero p{
+    color:#b8bed0;
+    font-size:12px;
+    max-width:600px;
+    line-height:1.6;
+}
+
+.hero-stats{
+    position:relative;
+    z-index:1;
+    display:flex;
+    gap:28px;
+    padding-right:15px;
+}
+
+.hero-stat strong{
+    display:block;
+    font-size:22px;
+}
+
+.hero-stat span{
+    color:#9da5b8;
+    font-size:9px;
+}
+
+/* KPI */
+
+.kpis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.kpi{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:17px;
+    box-shadow:0 4px 18px rgba(20,30,50,.035);
+}
+
+.kpi-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.kpi-label{
+    font-size:10px;
+    color:var(--muted);
+    font-weight:650;
+}
+
+.kpi-icon{
+    width:31px;
+    height:31px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f0edff;
+}
+
+.kpi-value{
+    font-size:25px;
+    font-weight:800;
+    margin-top:11px;
+}
+
+.kpi-foot{
+    font-size:9px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* GRID */
+
+.row{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.card{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:15px;
+    box-shadow:0 4px 18px rgba(20,30,50,.035);
+    overflow:hidden;
+}
+
+.card-header{
+    padding:17px 19px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #f0f2f6;
+}
+
+.card-title{
+    font-size:13px;
+    font-weight:750;
+}
+
+.card-sub{
+    font-size:9px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.card-body{
+    padding:18px;
+}
+
+/* GRAPH */
+
+.graph-area{
+    height:355px;
+    position:relative;
+    background:
+      radial-gradient(circle at center,rgba(124,92,255,.05),transparent 45%),
+      linear-gradient(#f5f6fa 1px,transparent 1px),
+      linear-gradient(90deg,#f5f6fa 1px,transparent 1px);
+    background-size:auto,32px 32px,32px 32px;
+    overflow:hidden;
+}
+
+#graphSvg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+}
+
+.graph-node{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    padding:9px 13px;
+    border-radius:9px;
+    background:white;
+    border:1px solid #ddd9ff;
+    box-shadow:0 5px 18px rgba(50,40,100,.1);
+    font-size:10px;
+    font-weight:700;
+    white-space:nowrap;
+    z-index:2;
+}
+
+.graph-node.memory{
+    background:linear-gradient(135deg,#7c5cff,#9a75ff);
+    color:white;
+    border:0;
+    padding:12px 17px;
+}
+
+.graph-node.location{
+    color:#4265bd;
+}
+
+.graph-node.activity{
+    color:#158765;
+}
+
+/* SENSOR PANEL */
+
+.sensor-readout{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-bottom:20px;
+}
+
+.axis-card{
+    background:#f8f9fc;
+    border:1px solid #eef0f5;
+    border-radius:11px;
+    padding:12px;
+}
+
+.axis-name{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.axis-value{
+    font-size:19px;
+    font-weight:800;
+    margin-top:5px;
+}
+
+.meter{
+    height:6px;
+    border-radius:6px;
+    background:#edf0f5;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.meter-fill{
+    height:100%;
+    border-radius:6px;
+    background:linear-gradient(90deg,#7c5cff,#a88cff);
+}
+
+.info-list{
+    border-top:1px solid #f0f2f6;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:11px 0;
+    border-bottom:1px solid #f0f2f6;
+    font-size:10px;
+}
+
+.info-row span:first-child{
+    color:var(--muted);
+}
+
+.info-row strong{
+    font-weight:700;
+}
+
+/* MEMORY */
+
+.memory-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+    padding:17px;
+}
+
+.memory{
+    border:1px solid #e9ecf2;
+    border-radius:13px;
+    overflow:hidden;
+    background:#fff;
+    transition:.2s;
+}
+
+.memory:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 25px rgba(20,30,50,.08);
+}
+
+.memory-image{
+    width:100%;
+    height:145px;
+    object-fit:cover;
+    display:block;
+    background:#eef1f6;
+}
+
+.no-image{
+    height:145px;
+    background:linear-gradient(135deg,#eef0f6,#f8f9fb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#9aa2b2;
+    font-size:11px;
+}
+
+.memory-body{
+    padding:13px;
+}
+
+.memory-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.memory-title{
+    font-size:11px;
+    font-weight:750;
+}
+
+.memory-time{
+    color:#929aaa;
+    font-size:8px;
+    white-space:nowrap;
+}
+
+.tags{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    margin:9px 0 12px;
+}
+
+.tag{
+    font-size:8px;
+    padding:5px 7px;
+    border-radius:20px;
+    background:#f1efff;
+    color:#6751d5;
+}
+
+.motion{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:5px;
+}
+
+.motion-item{
+    background:#f7f8fa;
+    padding:7px;
+    border-radius:7px;
+    text-align:center;
+}
+
+.motion-item small{
+    color:#9aa1af;
+    font-size:7px;
+}
+
+.motion-item strong{
+    display:block;
+    font-size:9px;
+    margin-top:3px;
+}
+
+/* CONTEXT */
+
+.context-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.context-box{
+    padding:13px;
+    border-radius:11px;
+    background:#f8f9fc;
+    border:1px solid #eef0f5;
+}
+
+.context-box small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.context-box strong{
+    display:block;
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* SEARCH */
+
+.search{
+    display:flex;
+    gap:8px;
+    padding:17px;
+}
+
+.search input{
+    flex:1;
+    border:1px solid #e2e5ec;
+    border-radius:9px;
+    padding:11px 13px;
+    font-size:11px;
+    outline:none;
+}
+
+.search input:focus{
+    border-color:#9a86ff;
+}
+
+.search button{
+    border:0;
+    border-radius:9px;
+    padding:0 19px;
+    background:linear-gradient(135deg,#7c5cff,#6546e8);
+    color:white;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.result{
+    margin:0 17px 17px;
+    background:#f7f8fb;
+    border-radius:9px;
+    padding:12px;
+    color:#667085;
+    font-size:10px;
+    min-height:35px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+    .sidebar{width:200px}
+    .main{margin-left:200px}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .row{grid-template-columns:1fr}
+}
+
+@media(max-width:700px){
+    .sidebar{display:none}
+    .main{margin-left:0}
+    .content{padding:15px}
+    .hero{display:block}
+    .hero-stats{margin-top:20px}
+    .kpis{grid-template-columns:1fr 1fr}
+    .memory-list{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🧠</div>
+        <div>
+            <div class="brand-name">REMINESSANCE</div>
+            <div class="brand-sub">MEMORY INTELLIGENCE</div>
+        </div>
+    </div>
+
+    <div class="nav-title">Workspace</div>
+
+    <div class="nav-item active">
+        <span>⌂</span> Memory Overview
+    </div>
+
+    <div class="nav-item">
+        <span>◈</span> Episodic Graph
+    </div>
+
+    <div class="nav-item">
+        <span>◉</span> Sensor Data
+    </div>
+
+    <div class="nav-item">
+        <span>▣</span> Memory Timeline
+    </div>
+
+    <div class="nav-title" style="margin-top:25px">System</div>
+
+    <div class="nav-item">
+        <span>⚙</span> Hardware
+    </div>
+
+    <div class="nav-item">
+        <span>⌕</span> Search Memory
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <div class="device-status">
+
+            <div class="device-title">
+                Prototype Status
+            </div>
+
+            <div class="device-row">
+                <span>
+                    <i class="dot green"></i>
+                    ESP32-CAM
+                </span>
+                <span>ONLINE</span>
+            </div>
+
+            <div class="device-row">
+                <span>
+                    <i class="dot green"></i>
+                    MPU6050
+                </span>
+                <span>ONLINE</span>
+            </div>
+
+            <div class="device-row">
+                <span>
+                    <i class="dot orange"></i>
+                    Audio
+                </span>
+                <span>NOT CONNECTED</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div>
+        <div class="page-title">Memory Intelligence Dashboard</div>
+        <div class="page-sub">
+            Context-aware episodic memory reconstruction
+        </div>
+    </div>
+
+    <div class="top-actions">
+
+        <div class="system-pill">
+            <i class="dot green"></i>
+            SYSTEM ACTIVE
+        </div>
+
+        <div class="avatar">R</div>
+
+    </div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            Episodic Memory System
+        </div>
+
+        <h1>Reconstruct what you experienced.</h1>
+
+        <p>
+            REMINESSANCE combines visual context, motion sensing and
+            structured memory representation to preserve and retrieve
+            meaningful real-world experiences.
+        </p>
+
+    </div>
+
+    <div class="hero-stats">
+
+        <div class="hero-stat">
+            <strong>{{ memories|length }}</strong>
+            <span>MEMORIES</span>
+        </div>
+
+        <div class="hero-stat">
+            <strong>0x68</strong>
+            <span>MPU ADDRESS</span>
+        </div>
+
+        <div class="hero-stat">
+            <strong>3</strong>
+            <span>AXES</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- KPIs -->
+
+<section class="kpis">
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+            <div class="kpi-label">EPISODIC MEMORIES</div>
+            <div class="kpi-icon">🧠</div>
+        </div>
+
+        <div class="kpi-value">{{ memories|length }}</div>
+        <div class="kpi-foot">Recorded memory episodes</div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+            <div class="kpi-label">VISUAL CAPTURES</div>
+            <div class="kpi-icon">📷</div>
+        </div>
+
+        <div class="kpi-value">
+            {{ memories|selectattr(9)|list|length }}
+        </div>
+
+        <div class="kpi-foot">
+            Images associated with memories
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+            <div class="kpi-label">SENSOR CHANNELS</div>
+            <div class="kpi-icon">📐</div>
+        </div>
+
+        <div class="kpi-value">3</div>
+
+        <div class="kpi-foot">
+            Accelerometer X / Y / Z
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-top">
+            <div class="kpi-label">MEMORY GRAPH</div>
+            <div class="kpi-icon">◈</div>
+        </div>
+
+        <div class="kpi-value">ACTIVE</div>
+
+        <div class="kpi-foot">
+            Context relationships available
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GRAPH + SENSOR -->
+
+<div class="row">
+
+
+    <!-- GRAPH -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+                <div class="card-title">Episodic Memory Graph</div>
+                <div class="card-sub">
+                    Relationships between memories, places and activities
+                </div>
+            </div>
+
+            <span class="tag">LIVE GRAPH</span>
+
+        </div>
+
+        <div class="graph-area" id="graphArea">
+
+            <svg id="graphSvg"></svg>
+
+            <div
+                class="graph-node memory"
+                style="left:50%;top:50%">
+                MEMORY EVENT
+            </div>
+
+            <div
+                class="graph-node location"
+                style="left:20%;top:25%">
+                COLLEGE
+            </div>
+
+            <div
+                class="graph-node location"
+                style="left:80%;top:25%">
+                CLASSROOM
+            </div>
+
+            <div
+                class="graph-node activity"
+                style="left:20%;top:75%">
+                LECTURE
+            </div>
+
+            <div
+                class="graph-node activity"
+                style="left:80%;top:75%">
+                MOTION
+            </div>
+
+            <div
+                class="graph-node"
+                style="left:50%;top:13%">
+                ENGAGED
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SENSOR -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+                <div class="card-title">Motion Intelligence</div>
+                <div class="card-sub">
+                    Latest MPU6050 reading
+                </div>
+            </div>
+
+            <span class="tag">0x68</span>
+
+        </div>
+
+        <div class="card-body">
+
+            {% set latest = memories[0] if memories else none %}
+
+            <div class="sensor-readout">
+
+                <div class="axis-card">
+                    <div class="axis-name">ACCEL X</div>
+
+                    <div class="axis-value">
+                        {{ "%.2f"|format(latest[6]|float) if latest else "0.00" }}
+                    </div>
+
+                    <div class="meter">
+                        <div class="meter-fill"
+                             style="width:{{ [((latest[6]|float)|abs)*35,100]|min if latest else 0 }}%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="axis-card">
+                    <div class="axis-name">ACCEL Y</div>
+
+                    <div class="axis-value">
+                        {{ "%.2f"|format(latest[7]|float) if latest else "0.00" }}
+                    </div>
+
+                    <div class="meter">
+                        <div class="meter-fill"
+                             style="width:{{ [((latest[7]|float)|abs)*35,100]|min if latest else 0 }}%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="axis-card">
+                    <div class="axis-name">ACCEL Z</div>
+
+                    <div class="axis-value">
+                        {{ "%.2f"|format(latest[8]|float) if latest else "0.00" }}
+                    </div>
+
+                    <div class="meter">
+                        <div class="meter-fill"
+                             style="width:{{ [((latest[8]|float)|abs)*35,100]|min if latest else 0 }}%">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="info-list">
+
+                <div class="info-row">
+                    <span>Sensor</span>
+                    <strong>MPU6050</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Communication</span>
+                    <strong>I²C</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Address</span>
+                    <strong>0x68</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Interface pins</span>
+                    <strong>SDA 13 · SCL 14</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Trigger</span>
+                    <strong>GPIO 12</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Status</span>
+                    <strong style="color:#15966a">Connected</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- CONTEXT -->
+
+<div class="row">
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+                <div class="card-title">Current Context</div>
+                <div class="card-sub">
+                    Reconstructed environmental context
+                </div>
+            </div>
+
+            <span class="tag">CONTEXT</span>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="context-grid">
+
+                <div class="context-box">
+                    <small>LOCATION</small>
+                    <strong>📍 College Classroom</strong>
+                </div>
+
+                <div class="context-box">
+                    <small>ACTIVITY</small>
+                    <strong>🎯 Lecture</strong>
+                </div>
+
+                <div class="context-box">
+                    <small>COGNITIVE STATE</small>
+                    <strong>🧠 Engaged</strong>
+                </div>
+
+                <div class="context-box">
+                    <small>EVENT TYPE</small>
+                    <strong>⚡ Motion Detected</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+                <div class="card-title">Hardware Pipeline</div>
+                <div class="card-sub">
+                    Prototype component status
+                </div>
+            </div>
+
+            <span class="tag">PROTOTYPE</span>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="info-list">
+
+                <div class="info-row">
+                    <span>📷 ESP32-CAM</span>
+                    <strong style="color:#15966a">● Connected</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>📐 MPU6050</span>
+                    <strong style="color:#15966a">● Connected</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>🔘 Event Button</span>
+                    <strong style="color:#15966a">● Ready</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>🎤 Audio</span>
+                    <strong style="color:#d97706">● Not connected</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- MEMORY TIMELINE -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div>
+            <div class="card-title">Memory Timeline</div>
+            <div class="card-sub">
+                Captured episodic experiences
+            </div>
+        </div>
+
+        <span class="tag">
+            {{ memories|length }} EPISODES
+        </span>
+
+    </div>
+
+
+    {% if memories %}
+
+    <div class="memory-list">
+
+        {% for m in memories %}
+
+        <article class="memory">
+
+            {% if m[9] %}
+
+                <img
+                    class="memory-image"
+                    src="/{{ m[9] }}"
+                    alt="Captured memory"
+                >
+
+            {% else %}
+
+                <div class="no-image">
+                    📷 No visual capture
+                </div>
+
+            {% endif %}
+
+
+            <div class="memory-body">
+
+                <div class="memory-head">
+
+                    <div class="memory-title">
+                        🧠 {{ m[2] or "Memory Captured" }}
+                    </div>
+
+                    <div class="memory-time">
+                        {{ m[1] }}
+                    </div>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span class="tag">
+                        📍 {{ m[3] or "Unknown" }}
+                    </span>
+
+                    <span class="tag">
+                        🎯 {{ m[4] or "Unknown" }}
+                    </span>
+
+                    <span class="tag">
+                        🧠 {{ m[5] or "Unknown" }}
+                    </span>
+
+                </div>
+
+
+                <div class="motion">
+
+                    <div class="motion-item">
+                        <small>X AXIS</small>
+                        <strong>{{ "%.2f"|format(m[6]|float) }} g</strong>
+                    </div>
+
+                    <div class="motion-item">
+                        <small>Y AXIS</small>
+                        <strong>{{ "%.2f"|format(m[7]|float) }} g</strong>
+                    </div>
+
+                    <div class="motion-item">
+                        <small>Z AXIS</small>
+                        <strong>{{ "%.2f"|format(m[8]|float) }} g</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div style="padding:30px;text-align:center;color:#8b94a5;font-size:12px">
+        No episodic memories recorded yet.
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section class="card" style="margin-top:18px">
+
+    <div class="card-header">
+
+        <div>
+            <div class="card-title">Ask Your Memory</div>
+            <div class="card-sub">
+                Retrieve information from the episodic memory store
+            </div>
+        </div>
+
+        <span>🔎</span>
+
+    </div>
+
+    <div class="search">
+
+        <input
+            id="searchInput"
+            placeholder="e.g. What happened in the classroom?"
+        >
+
+        <button onclick="searchMemory()">
+            RETRIEVE
+        </button>
+
+    </div>
+
+    <div class="result" id="searchResult">
+        Enter a question to search the memory store.
+    </div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<script>
+
+/* GRAPH CONNECTIONS */
+
+function drawGraph(){
+
+    const area =
+        document.getElementById("graphArea");
+
+    const svg =
+        document.getElementById("graphSvg");
+
+    const nodes =
+        area.querySelectorAll(".graph-node");
+
+    svg.innerHTML = "";
+
+    const rect =
+        area.getBoundingClientRect();
+
+    const center =
+        nodes[0].getBoundingClientRect();
+
+    const cx =
+        center.left - rect.left + center.width/2;
+
+    const cy =
+        center.top - rect.top + center.height/2;
+
+    for(let i=1;i<nodes.length;i++){
+
+        const r =
+            nodes[i].getBoundingClientRect();
+
+        const x =
+            r.left - rect.left + r.width/2;
+
+        const y =
+            r.top - rect.top + r.height/2;
+
+        const line =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "line"
+            );
+
+        line.setAttribute("x1",cx);
+        line.setAttribute("y1",cy);
+        line.setAttribute("x2",x);
+        line.setAttribute("y2",y);
+
+        line.setAttribute(
+            "stroke",
+            "#d7d2ff"
+        );
+
+        line.setAttribute(
+            "stroke-width",
+            "1.5"
+        );
+
+        line.setAttribute(
+            "stroke-dasharray",
+            "4 4"
+        );
+
+        svg.appendChild(line);
+    }
+}
+
+window.addEventListener("load",drawGraph);
+window.addEventListener("resize",drawGraph);
+
+
+/* MEMORY SEARCH */
+
+async function searchMemory(){
+
+    const input =
+        document.getElementById("searchInput");
+
+    const result =
+        document.getElementById("searchResult");
+
+    const q =
+        input.value.trim();
+
+    if(!q){
+
+        result.innerText =
+            "Enter a question to search the memory store.";
+
+        return;
+    }
+
+    result.innerHTML =
+        "🔎 Searching episodic memory...";
+
+    try{
+
+        const response =
+            await fetch(
+                "/search?q="+
+                encodeURIComponent(q)
+            );
+
+        const data =
+            await response.json();
+
+        if(!data || data.length===0){
+
+            result.innerHTML =
+                "<strong>No matching memory found.</strong>";
+
+            return;
+        }
+
+        const memory =
+            data[0];
+
+        result.innerHTML =
+            "<strong>Memory retrieved</strong><br><br>"+
+            "📅 "+memory[0]+
+            " &nbsp; • &nbsp; "+
+            "🧠 "+memory[1]+
+            " &nbsp; • &nbsp; "+
+            "📍 "+memory[2]+
+            " &nbsp; • &nbsp; "+
+            "🎯 "+memory[3];
+
+    }catch(e){
+
+        result.innerHTML =
+            "<strong>Memory retrieval unavailable.</strong>";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
